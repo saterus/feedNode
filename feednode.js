@@ -24,7 +24,8 @@ try{
   process.exit(1);
 }
 
-var app = require('express').createServer();
+var express = require('express');
+var app = express.createServer();
 var socket = require('socket.io').listen(app);
 var buffer = new Array();
 
@@ -32,19 +33,19 @@ require('jade');
 app.set('view engine', 'jade');
 app.set('view options', {layout: false});
 
-//js+css files
-app.get('/*.(js|css)', function(req, res){
-  res.sendfile("./public"+req.url);
+app.configure(function(){
+  app.use(express.logger());
+  app.use(express.static(__dirname + '/public'));
 });
 
 app.get('/', function(req, res){
-	res.render('index');	
+	res.render('index');
 });
 
 app.post('/:token/:msg', function(req, res){
   if(applications[req.params.token]){
     buffer.unshift({category:applications[req.params.token].Name ,item:req.params.msg})
-    res.send('yup',200) 
+    res.send('yup',200)
   }else{
     res.send('nope',403)
   }
@@ -58,17 +59,17 @@ function clientDisconnect(client){
 }
 
 function sendNewItems(){
-  if(next = buffer.pop()){ 
-    socket.broadcast(next); 
+  if(next = buffer.pop()){
+    socket.broadcast(next);
   }
 }
 
-socket.on('connection', function(client){ 
+socket.on('connection', function(client){
   activeClients +=1;
   socket.broadcast({clients:activeClients})
   client.send({apps:clientSideAppList})
   client.on('disconnect', function(){clientDisconnect(client)});
-}); 
+});
 
 app.listen(3000)
 
