@@ -1,2 +1,22 @@
-[{"Name":"app", "Token":"12ed54m45j52j234hs","Color":"#7CFC00"},
-{"Name":"app1", "Token":"awdkja3232kdsf2","Color":"#4169E1"}]
+[
+    {
+    "name": "All",
+    "token": "All",
+    "color": "#333"
+  },
+  {
+    "name": "Commits",
+    "token": "commits",
+    "color": "#658263"
+  },
+  {
+    "name": "Issues",
+    "token": "issues",
+    "color": "#648283"
+  },
+  {
+    "name": "Server Errors",
+    "token": "server_errors",
+    "color": "#8F796B"
+  }
+]

@@ -2,13 +2,15 @@
 html(lang="en")
   head
     title nodeFeed
+    link(rel="stylesheet", type="text/css", href="reset.css")
     link(rel="stylesheet", type="text/css", href="main.css")
-    script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js")
+    script(type="text/javascript", src="http://code.jquery.com/jquery-1.6.min.js")
     script(type="text/javascript", src="http://cdn.socket.io/stable/socket.io.js")
+    script(type="text/javascript", src="/queue.js")
     script(type="text/javascript", src="/feed.js")
   body
     #heading
-      h1 News Feed
+      h1 Activity Feed
     #content
       #categories
         ul#category_list
